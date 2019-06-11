@@ -1,0 +1,18 @@
+<!DOCTYPE web-app PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+    <display-name>Trabalho final de Computação 3</display-name>
+    <servlet>
+        <servlet-name>HelloWorldServlet</servlet-name>
+        <servlet-class>br.net.hnn.ufrrj.comp3_trabalho_final.dominio.HelloWorld</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HelloWorldServlet</servlet-name>
+        <url-pattern>/hello-world</url-pattern>
+    </servlet-mapping>
+    <listener>
+        <listener-class>br.net.hnn.ufrrj.comp3_trabalho_final.dominio.StartupListener</listener-class>
+    </listener>
+</web-app>
