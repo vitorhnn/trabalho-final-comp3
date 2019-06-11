@@ -9,6 +9,8 @@ import java.io.IOException;
 public class HelloWorld extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        String[] mensagens = { "Olá, mundo", "Adeus, mundo" };
+        req.getSession().setAttribute("mensagens", mensagens);
         req.getRequestDispatcher("/WEB-INF/Hello.jsp").forward(req, res);
     }
 }
