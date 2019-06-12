@@ -15,6 +15,7 @@ public class DatabaseConnectionSingleton {
     public static DatabaseConnectionSingleton getInstance() {
         if (instance == null) {
             try {
+                Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
                 instance = new DatabaseConnectionSingleton();
             } catch (Exception ex) {
                 throw new RuntimeException("Failed to initialize database singleton");
