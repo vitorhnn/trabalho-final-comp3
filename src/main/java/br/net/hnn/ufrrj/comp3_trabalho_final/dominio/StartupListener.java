@@ -1,6 +1,6 @@
 package br.net.hnn.ufrrj.comp3_trabalho_final.dominio;
 
-import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.DatabaseConnectionSingleton;
+import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.db.DatabaseConnectionSingleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,7 +10,6 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
 public class StartupListener implements ServletContextListener {
@@ -18,6 +17,7 @@ public class StartupListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
+        logger.info("context initialized");
         Class self = this.getClass();
         URL resource = self.getResource("startup.sql");
         try {
@@ -31,7 +31,6 @@ public class StartupListener implements ServletContextListener {
                 ps.executeUpdate();
             }
         } catch (Exception ex) {
-            logger.error("Unhandled exception while reading startup sql");
             throw new RuntimeException();
         }
     }

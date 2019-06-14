@@ -1,4 +1,3 @@
-<%@ page import="java.util.List" %>
 <html>
 <body>
 <h2>Mensagens</h2>

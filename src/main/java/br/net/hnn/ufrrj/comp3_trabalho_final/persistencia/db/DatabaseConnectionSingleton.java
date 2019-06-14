@@ -1,4 +1,4 @@
-package br.net.hnn.ufrrj.comp3_trabalho_final.persistencia;
+package br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.db;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,22 +10,23 @@ import java.sql.SQLException;
 public class DatabaseConnectionSingleton {
     private static final Logger logger = LoggerFactory.getLogger(DatabaseConnectionSingleton.class);
 
-    private static DatabaseConnectionSingleton instance;
+    private static DatabaseConnectionSingleton instance = new DatabaseConnectionSingleton();
+
+    private DatabaseConnectionSingleton() {
+        try {
+            Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
+        } catch (Exception e) {
+            logger.error("failed to initialize derby");
+            throw new RuntimeException("failed to initialize derby");
+        }
+    }
 
     public static DatabaseConnectionSingleton getInstance() {
-        if (instance == null) {
-            try {
-                Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
-                instance = new DatabaseConnectionSingleton();
-            } catch (Exception ex) {
-                throw new RuntimeException("Failed to initialize database singleton");
-            }
-        }
-
         return instance;
     }
 
     public Connection getConnection() {
+        logger.debug("acquiring connection");
         try {
             return DriverManager.getConnection("jdbc:derby:memory:teste;create=true");
         } catch (SQLException e) {
