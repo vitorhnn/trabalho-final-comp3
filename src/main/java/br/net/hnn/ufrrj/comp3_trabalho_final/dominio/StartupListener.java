@@ -1,7 +1,6 @@
 package br.net.hnn.ufrrj.comp3_trabalho_final.dominio;
 
 import br.net.hnn.ufrrj.comp3_trabalho_final.ServiceLocator;
-import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.UsuarioTableGateway;
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.db.DatabaseConnectionSingleton;
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.mock.MockMuseuTableGateway;
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.mock.MockSolicitacaoMuseuTableGateway;
@@ -23,8 +22,7 @@ public class StartupListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         logger.info("context initialized");
-        Class self = this.getClass();
-        URL resource = self.getResource("startup.sql");
+        URL resource = this.getClass().getResource("startup.sql");
         try {
             String fileContents = new String(Files.readAllBytes(Paths.get(resource.toURI())));
 
@@ -37,6 +35,7 @@ public class StartupListener implements ServletContextListener {
             }
 
         } catch (Exception ex) {
+            logger.error("failed to seed initial db structure");
             throw new RuntimeException();
         }
 
