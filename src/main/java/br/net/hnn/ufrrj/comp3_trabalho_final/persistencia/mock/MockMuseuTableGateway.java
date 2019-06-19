@@ -3,6 +3,7 @@ package br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.mock;
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.MuseuTableGateway;
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.dto.MuseuDTO;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Optional;
@@ -13,10 +14,11 @@ public class MockMuseuTableGateway implements MuseuTableGateway {
     public MockMuseuTableGateway() {
         mockStorage = new HashMap<>();
         mockStorage.put(1, new MuseuDTO.MuseuDTOBuilder()
+                .setId(1)
                 .setNome("Departamento de Ciência da Computação")
                 .setCidade("Nova Iguaçu")
                 .setEstado("Rio de Janeiro")
-                .setDataCriacao(LocalDateTime.now())
+                .setDataCriacao(LocalDate.now())
                 .setCpfGestor("111111")
                 .build()
         );

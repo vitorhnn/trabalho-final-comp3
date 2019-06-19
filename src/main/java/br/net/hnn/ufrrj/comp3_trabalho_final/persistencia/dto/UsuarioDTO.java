@@ -3,6 +3,8 @@ package br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.dto;
 import org.jetbrains.annotations.Contract;
 
 public final class UsuarioDTO {
+    private int id;
+
     private String cpf;
 
     private String nome;
@@ -14,12 +16,18 @@ public final class UsuarioDTO {
     private String cargo;
 
     @Contract(pure = true)
-    public UsuarioDTO(String cpf, String nome, String senha, String museu, String cargo) {
+    private UsuarioDTO(int id, String cpf, String nome, String senha, String museu, String cargo) {
+        this.id = id;
         this.cpf = cpf;
         this.nome = nome;
         this.senha = senha;
         this.museu = museu;
         this.cargo = cargo;
+    }
+
+    @Contract(pure = true)
+    public int getId() {
+        return id;
     }
 
     @Contract(pure = true)
@@ -48,11 +56,17 @@ public final class UsuarioDTO {
     }
 
     public static class UsuarioDTOBuilder {
+        private int id;
         private String cpf;
         private String nome;
         private String senha;
         private String museu;
         private String cargo;
+
+        public UsuarioDTOBuilder setId(int id) {
+            this.id = id;
+            return this;
+        }
 
         public UsuarioDTOBuilder setCpf(String cpf) {
             this.cpf = cpf;
@@ -80,7 +94,7 @@ public final class UsuarioDTO {
         }
 
         public UsuarioDTO build() {
-            return new UsuarioDTO(cpf, nome, senha, museu, cargo);
+            return new UsuarioDTO(id, cpf, nome, senha, museu, cargo);
         }
     }
 }

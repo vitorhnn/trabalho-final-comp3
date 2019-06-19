@@ -2,6 +2,7 @@ package br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.dto;
 
 import org.jetbrains.annotations.Contract;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public final class MuseuDTO {
@@ -9,7 +10,7 @@ public final class MuseuDTO {
 
     private String nome;
 
-    private LocalDateTime dataCriacao;
+    private LocalDate dataCriacao;
 
     private String cidade;
 
@@ -18,7 +19,7 @@ public final class MuseuDTO {
     private String cpfGestor;
 
     @Contract(pure = true)
-    public MuseuDTO(String nome, LocalDateTime dataCriacao, String cidade, String estado, String cpfGestor) {
+    private MuseuDTO(String nome, LocalDate dataCriacao, String cidade, String estado, String cpfGestor) {
         this.nome = nome;
         this.dataCriacao = dataCriacao;
         this.cidade = cidade;
@@ -27,12 +28,17 @@ public final class MuseuDTO {
     }
 
     @Contract(pure = true)
+    public int getId() {
+        return id;
+    }
+
+    @Contract(pure = true)
     public String getNome() {
         return nome;
     }
 
     @Contract(pure = true)
-    public LocalDateTime getDataCriacao() {
+    public LocalDate getDataCriacao() {
         return dataCriacao;
     }
 
@@ -52,18 +58,24 @@ public final class MuseuDTO {
     }
 
     public static class MuseuDTOBuilder {
+        private int id;
         private String nome;
-        private LocalDateTime dataCriacao;
+        private LocalDate dataCriacao;
         private String cidade;
         private String estado;
         private String cpfGestor;
+
+        public MuseuDTOBuilder setId(int id) {
+            this.id = id;
+            return this;
+        }
 
         public MuseuDTOBuilder setNome(String nome) {
             this.nome = nome;
             return this;
         }
 
-        public MuseuDTOBuilder setDataCriacao(LocalDateTime dataCriacao) {
+        public MuseuDTOBuilder setDataCriacao(LocalDate dataCriacao) {
             this.dataCriacao = dataCriacao;
             return this;
         }

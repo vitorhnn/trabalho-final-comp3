@@ -1,6 +1,11 @@
 package br.net.hnn.ufrrj.comp3_trabalho_final.dominio;
 
+import br.net.hnn.ufrrj.comp3_trabalho_final.ServiceLocator;
+import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.UsuarioTableGateway;
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.db.DatabaseConnectionSingleton;
+import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.mock.MockMuseuTableGateway;
+import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.mock.MockSolicitacaoMuseuTableGateway;
+import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.mock.MockUsuarioTableGateway;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,8 +35,17 @@ public class StartupListener implements ServletContextListener {
                 PreparedStatement ps = con.prepareStatement(statement);
                 ps.executeUpdate();
             }
+
         } catch (Exception ex) {
             throw new RuntimeException();
         }
+
+        logger.info("adding table gateways to provider");
+
+        ServiceLocator sl = ServiceLocator.getInstance();
+
+        sl.provide(new MockMuseuTableGateway());
+        sl.provide(new MockUsuarioTableGateway());
+        sl.provide(new MockSolicitacaoMuseuTableGateway());
     }
 }
