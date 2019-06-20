@@ -2,13 +2,13 @@ package br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.db;
 
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.SolicitacaoMuseuTableGateway;
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.dto.SolicitacaoMuseuDTO;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class DBSolicitacaoMuseuTableGateway implements SolicitacaoMuseuTableGateway {
@@ -18,17 +18,24 @@ public class DBSolicitacaoMuseuTableGateway implements SolicitacaoMuseuTableGate
 
     private PreparedStatement findByIdStatement;
 
+    private PreparedStatement findAllStatement;
+
     private PreparedStatement insertStatement;
+
 
     public DBSolicitacaoMuseuTableGateway() throws SQLException {
         dbConn = DatabaseConnectionSingleton.getInstance().getConnection();
 
         findByIdStatement = dbConn.prepareStatement(
-                "SELECT id, nome, cidade, estado, cpfGestor, nomeGestor, senhaGestor FROM Solicitacao WHERE id = ?"
+                "SELECT id, nome, dataCriacao, cidade, estado, cpfGestor, nomeGestor, senhaGestor FROM Solicitacao WHERE id = ?"
+        );
+
+        findAllStatement = dbConn.prepareStatement(
+                "SELECT id, nome, dataCriacao, cidade, estado, cpfGestor, nomeGestor, senhaGestor FROM Solicitacao"
         );
 
         insertStatement = dbConn.prepareStatement(
-                "INSERT INTO Solicitacao (nome, cidade, estado, cpfGestor, nomeGestor, senhaGestor) VALUES (?, ?, ?, ?, ?, ?)"
+                "INSERT INTO Solicitacao (nome, dataCriacao, cidade, estado, cpfGestor, nomeGestor, senhaGestor) VALUES (?, ?, ?, ?, ?, ?, ?)"
         );
     }
 
@@ -43,11 +50,12 @@ public class DBSolicitacaoMuseuTableGateway implements SolicitacaoMuseuTableGate
             SolicitacaoMuseuDTO returnDto = new SolicitacaoMuseuDTO.SolicitacaoMuseuDTOBuilder()
                     .setId(rs.getInt(1))
                     .setNome(rs.getString(2))
-                    .setCidade(rs.getString(3))
-                    .setEstado(rs.getString(4))
-                    .setCpfGestor(rs.getString(5))
-                    .setNomeGestor(rs.getString(6))
-                    .setSenhaGestor(rs.getString(7))
+                    .setDataCriacao(rs.getDate(3).toLocalDate())
+                    .setCidade(rs.getString(4))
+                    .setEstado(rs.getString(5))
+                    .setCpfGestor(rs.getString(6))
+                    .setNomeGestor(rs.getString(7))
+                    .setSenhaGestor(rs.getString(8))
                     .build();
 
             return Optional.of(returnDto);
@@ -57,15 +65,39 @@ public class DBSolicitacaoMuseuTableGateway implements SolicitacaoMuseuTableGate
     }
 
     @Override
+    public @NotNull List<SolicitacaoMuseuDTO> findAll() throws SQLException {
+        ArrayList<SolicitacaoMuseuDTO> collector = new ArrayList<>();
+        ResultSet rs = findAllStatement.executeQuery();
+
+        while (rs.next()) {
+            SolicitacaoMuseuDTO returnDto = new SolicitacaoMuseuDTO.SolicitacaoMuseuDTOBuilder()
+                    .setId(rs.getInt(1))
+                    .setNome(rs.getString(2))
+                    .setDataCriacao(rs.getDate(3).toLocalDate())
+                    .setCidade(rs.getString(4))
+                    .setEstado(rs.getString(5))
+                    .setCpfGestor(rs.getString(6))
+                    .setNomeGestor(rs.getString(7))
+                    .setSenhaGestor(rs.getString(8))
+                    .build();
+
+            collector.add(returnDto);
+        }
+
+        return collector;
+    }
+
+    @Override
     public void insert(SolicitacaoMuseuDTO dto) throws SQLException {
         insertStatement.clearParameters();
 
         insertStatement.setString(1, dto.getNome());
-        insertStatement.setString(2, dto.getCidade());
-        insertStatement.setString(3, dto.getEstado());
-        insertStatement.setString(4, dto.getCpfGestor());
-        insertStatement.setString(5, dto.getNomeGestor());
-        insertStatement.setString(6, dto.getSenhaGestor());
+        insertStatement.setDate(2, Date.valueOf(dto.getDataCriacao()));
+        insertStatement.setString(3, dto.getCidade());
+        insertStatement.setString(4, dto.getEstado());
+        insertStatement.setString(5, dto.getCpfGestor());
+        insertStatement.setString(6, dto.getNomeGestor());
+        insertStatement.setString(7, dto.getSenhaGestor());
         insertStatement.executeUpdate();
     }
 }

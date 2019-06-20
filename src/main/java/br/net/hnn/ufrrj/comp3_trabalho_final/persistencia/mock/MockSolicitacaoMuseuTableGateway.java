@@ -2,9 +2,13 @@ package br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.mock;
 
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.SolicitacaoMuseuTableGateway;
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.dto.SolicitacaoMuseuDTO;
+import org.jetbrains.annotations.NotNull;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 
 public class MockSolicitacaoMuseuTableGateway implements SolicitacaoMuseuTableGateway {
@@ -21,7 +25,7 @@ public class MockSolicitacaoMuseuTableGateway implements SolicitacaoMuseuTableGa
                 .setEstado("Rio de Janeiro")
                 .setDataCriacao(LocalDate.now())
                 .setCpfGestor("111111")
-                .setCpfGestor("Victor Hermann Chiletto")
+                .setNomeGestor("Victor Hermann Chiletto")
                 .setSenhaGestor("senhavaiaqui")
                 .build()
         );
@@ -30,6 +34,11 @@ public class MockSolicitacaoMuseuTableGateway implements SolicitacaoMuseuTableGa
     @Override
     public Optional<SolicitacaoMuseuDTO> getSolicitacaoMuseuById(int id) {
         return Optional.ofNullable(mockStorage.get(id));
+    }
+
+    @Override
+    public @NotNull List<SolicitacaoMuseuDTO> findAll() throws SQLException {
+        return new ArrayList<>(mockStorage.values());
     }
 
     @Override

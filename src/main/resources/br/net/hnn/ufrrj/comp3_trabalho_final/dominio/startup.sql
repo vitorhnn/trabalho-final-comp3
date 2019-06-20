@@ -155,6 +155,7 @@ CREATE TABLE Solicitacao(
     (START with 1, INCREMENT BY 1),
 
     nome VARCHAR(255) NOT NULL,
+    dataCriacao DATE NOT NULL,
     cidade VARCHAR(255) NOT NULL,
     estado VARCHAR(255) NOT NULL,
     cpfGestor VARCHAR(255) NOT NULL,

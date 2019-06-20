@@ -1,7 +1,6 @@
 package br.net.hnn.ufrrj.comp3_trabalho_final.dominio.solicitacaomuseu;
 
 import br.net.hnn.ufrrj.comp3_trabalho_final.dominio.Command;
-import br.net.hnn.ufrrj.comp3_trabalho_final.dominio.solicitacaomuseu.CriarSolicitacaoMuseuCommand;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

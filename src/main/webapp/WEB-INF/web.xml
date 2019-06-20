@@ -16,6 +16,14 @@
         <servlet-name>SolicitacaoMuseuServlet</servlet-name>
         <servlet-class>br.net.hnn.ufrrj.comp3_trabalho_final.dominio.solicitacaomuseu.SolicitacaoMuseuServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CriarMuseuServlet</servlet-name>
+        <servlet-class>br.net.hnn.ufrrj.comp3_trabalho_final.dominio.criarmuseu.CriarMuseuServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CriarMuseuServlet</servlet-name>
+        <url-pattern>/criar-museu</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SolicitacaoMuseuServlet</servlet-name>
         <url-pattern>/solicitacao-museu</url-pattern>
