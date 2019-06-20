@@ -13,11 +13,11 @@
         <servlet-class>br.net.hnn.ufrrj.comp3_trabalho_final.dominio.Login</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CriarSolicitacaoServlet</servlet-name>
-        <servlet-class>br.net.hnn.ufrrj.comp3_trabalho_final.dominio.SolicitacaoMuseu</servlet-class>
+        <servlet-name>SolicitacaoMuseuServlet</servlet-name>
+        <servlet-class>br.net.hnn.ufrrj.comp3_trabalho_final.dominio.solicitacaomuseu.SolicitacaoMuseuServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>CriarSolicitacaoServlet</servlet-name>
+        <servlet-name>SolicitacaoMuseuServlet</servlet-name>
         <url-pattern>/solicitacao-museu</url-pattern>
     </servlet-mapping>
     <servlet-mapping>

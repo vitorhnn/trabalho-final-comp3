@@ -1,6 +1,7 @@
-package br.net.hnn.ufrrj.comp3_trabalho_final.dominio;
+package br.net.hnn.ufrrj.comp3_trabalho_final.dominio.solicitacaomuseu;
 
-import br.net.hnn.ufrrj.comp3_trabalho_final.dominio.roteirossolicitacaomuseu.CriarSolicitacaoMuseuCommand;
+import br.net.hnn.ufrrj.comp3_trabalho_final.dominio.Command;
+import br.net.hnn.ufrrj.comp3_trabalho_final.dominio.solicitacaomuseu.CriarSolicitacaoMuseuCommand;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +11,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class SolicitacaoMuseu extends HttpServlet {
+public class SolicitacaoMuseuServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         req.getRequestDispatcher("/WEB-INF/CriarSolicitacaoMuseu.jsp").forward(req, res);

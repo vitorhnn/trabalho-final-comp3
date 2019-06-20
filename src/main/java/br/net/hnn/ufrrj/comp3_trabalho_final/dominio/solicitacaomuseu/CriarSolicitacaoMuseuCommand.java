@@ -1,4 +1,4 @@
-package br.net.hnn.ufrrj.comp3_trabalho_final.dominio.roteirossolicitacaomuseu;
+package br.net.hnn.ufrrj.comp3_trabalho_final.dominio.solicitacaomuseu;
 
 import br.net.hnn.ufrrj.comp3_trabalho_final.ServiceLocator;
 import br.net.hnn.ufrrj.comp3_trabalho_final.dominio.Command;
