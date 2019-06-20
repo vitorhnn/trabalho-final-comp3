@@ -5,9 +5,10 @@ import br.net.hnn.ufrrj.comp3_trabalho_final.dominio.Command;
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.SolicitacaoMuseuTableGateway;
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.dto.SolicitacaoMuseuDTO;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 
-public class CriarSolicitacaoMuseuCommand implements Command {
+public class CriarSolicitacaoMuseuCommand implements Command<Void, SQLException> {
     private SolicitacaoMuseuTableGateway tableGateway = ServiceLocator.getInstance().getSolicitacaoMuseuTableGateway();
 
     private SolicitacaoMuseuDTO pendingInsert;
@@ -33,8 +34,9 @@ public class CriarSolicitacaoMuseuCommand implements Command {
     }
 
     @Override
-    public Object execute() throws Exception {
+    public Void execute() throws SQLException {
         tableGateway.insert(pendingInsert);
-        return pendingInsert;
+
+        return null;
     }
 }
