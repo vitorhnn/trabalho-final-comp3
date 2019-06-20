@@ -27,28 +27,24 @@ public class DBMuseuTableGateway implements MuseuTableGateway {
     }
 
     @Override
-    public Optional<MuseuDTO> findMuseuById(int id) {
-        try {
-            findByIdStmt.clearParameters();
-            findByIdStmt.setInt(1, id);
+    public Optional<MuseuDTO> findMuseuById(int id) throws SQLException {
+        findByIdStmt.clearParameters();
+        findByIdStmt.setInt(1, id);
 
-            ResultSet rs = findByIdStmt.executeQuery();
+        ResultSet rs = findByIdStmt.executeQuery();
 
-            if (rs.next()) {
-                MuseuDTO returnDto = new MuseuDTO.MuseuDTOBuilder()
-                        .setId(rs.getInt(1))
-                        .setNome(rs.getString(2))
-                        .setCidade(rs.getString(3))
-                        .setEstado(rs.getString(4))
-                        .setIdGestor(rs.getInt(5))
-                        .build();
+        if (rs.next()) {
+            MuseuDTO returnDto = new MuseuDTO.MuseuDTOBuilder()
+                    .setId(rs.getInt(1))
+                    .setNome(rs.getString(2))
+                    .setCidade(rs.getString(3))
+                    .setEstado(rs.getString(4))
+                    .setIdGestor(rs.getInt(5))
+                    .build();
 
-                return Optional.of(returnDto);
-            }
-
-            return Optional.empty();
-        } catch (SQLException ex) {
-            throw new RuntimeException(ex);
+            return Optional.of(returnDto);
         }
+
+        return Optional.empty();
     }
 }

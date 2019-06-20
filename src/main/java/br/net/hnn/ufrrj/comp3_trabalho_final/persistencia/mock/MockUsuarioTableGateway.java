@@ -15,8 +15,6 @@ public class MockUsuarioTableGateway implements UsuarioTableGateway {
                 .setId(1)
                 .setCpf("11111111111")
                 .setNome("Victor Hermann Chiletto")
-                .setCargo("Administrador")
-                .setMuseu("Departamento de Ciência da Computação")
                 .setSenha("hnn")
                 .build()
         );
