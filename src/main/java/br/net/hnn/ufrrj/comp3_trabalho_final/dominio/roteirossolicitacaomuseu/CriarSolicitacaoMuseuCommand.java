@@ -1,8 +1,8 @@
 package br.net.hnn.ufrrj.comp3_trabalho_final.dominio.roteirossolicitacaomuseu;
 
 import br.net.hnn.ufrrj.comp3_trabalho_final.ServiceLocator;
-import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.SolicitacaoMuseuTableGateway;
 import br.net.hnn.ufrrj.comp3_trabalho_final.dominio.Command;
+import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.SolicitacaoMuseuTableGateway;
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.dto.SolicitacaoMuseuDTO;
 
 import java.time.LocalDate;
@@ -21,15 +21,15 @@ public class CriarSolicitacaoMuseuCommand implements Command {
             String nomeGestor,
             String senhaGestor
     ) {
-       pendingInsert = new SolicitacaoMuseuDTO.SolicitacaoMuseuDTOBuilder()
-               .setNome(nome)
-               .setDataCriacao(dataCriacao)
-               .setCidade(cidade)
-               .setEstado(estado)
-               .setCpfGestor(cpfGestor)
-               .setNomeGestor(nomeGestor)
-               .setSenhaGestor(senhaGestor)
-               .build();
+        pendingInsert = new SolicitacaoMuseuDTO.SolicitacaoMuseuDTOBuilder()
+                .setNome(nome)
+                .setDataCriacao(dataCriacao)
+                .setCidade(cidade)
+                .setEstado(estado)
+                .setCpfGestor(cpfGestor)
+                .setNomeGestor(nomeGestor)
+                .setSenhaGestor(senhaGestor)
+                .build();
     }
 
     @Override

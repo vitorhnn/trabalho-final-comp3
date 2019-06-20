@@ -4,7 +4,6 @@ import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.MuseuTableGateway;
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.dto.MuseuDTO;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Optional;
 
@@ -19,7 +18,7 @@ public class MockMuseuTableGateway implements MuseuTableGateway {
                 .setCidade("Nova Iguaçu")
                 .setEstado("Rio de Janeiro")
                 .setDataCriacao(LocalDate.now())
-                .setCpfGestor("111111")
+                .setIdGestor(1)
                 .build()
         );
     }

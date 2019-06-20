@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class Login extends HttpServlet {
     @Override
@@ -42,6 +43,8 @@ public class Login extends HttpServlet {
         } catch (UsuarioNaoExisteException | SenhaIncorretaException ex) {
             res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             req.getRequestDispatcher("/WEB-INF/Login.jsp").forward(req, res);
+        } catch (SQLException ex) {
+            throw new ServletException(ex);
         }
     }
 }

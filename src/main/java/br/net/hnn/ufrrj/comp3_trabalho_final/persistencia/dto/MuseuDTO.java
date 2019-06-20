@@ -3,7 +3,6 @@ package br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.dto;
 import org.jetbrains.annotations.Contract;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public final class MuseuDTO {
     private int id;
@@ -16,15 +15,15 @@ public final class MuseuDTO {
 
     private String estado;
 
-    private String cpfGestor;
+    private int idGestor;
 
     @Contract(pure = true)
-    private MuseuDTO(String nome, LocalDate dataCriacao, String cidade, String estado, String cpfGestor) {
+    private MuseuDTO(String nome, LocalDate dataCriacao, String cidade, String estado, int idGestor) {
         this.nome = nome;
         this.dataCriacao = dataCriacao;
         this.cidade = cidade;
         this.estado = estado;
-        this.cpfGestor = cpfGestor;
+        this.idGestor = idGestor;
     }
 
     @Contract(pure = true)
@@ -53,8 +52,8 @@ public final class MuseuDTO {
     }
 
     @Contract(pure = true)
-    public String getCpfGestor() {
-        return cpfGestor;
+    public int getIdGestor() {
+        return idGestor;
     }
 
     public static class MuseuDTOBuilder {
@@ -63,7 +62,7 @@ public final class MuseuDTO {
         private LocalDate dataCriacao;
         private String cidade;
         private String estado;
-        private String cpfGestor;
+        private int idGestor;
 
         public MuseuDTOBuilder setId(int id) {
             this.id = id;
@@ -90,13 +89,13 @@ public final class MuseuDTO {
             return this;
         }
 
-        public MuseuDTOBuilder setCpfGestor(String cpfGestor) {
-            this.cpfGestor = cpfGestor;
+        public MuseuDTOBuilder setIdGestor(int idGestor) {
+            this.idGestor = idGestor;
             return this;
         }
 
         public MuseuDTO build() {
-            return new MuseuDTO(nome, dataCriacao, cidade, estado, cpfGestor);
+            return new MuseuDTO(nome, dataCriacao, cidade, estado, idGestor);
         }
     }
 }

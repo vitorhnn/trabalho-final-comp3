@@ -50,4 +50,19 @@ public class DatabaseConnectionSingleton {
             throw new RuntimeException(e);
         }
     }
+
+    public void shutdown() {
+        logger.info("shutting down database");
+        try {
+            DriverManager.getConnection("jdbc:derby:;shutdown=true");
+        } catch (SQLException ex) {
+            if (ex.getSQLState().equals("XJ015")) {
+                logger.info("derby shutdown ok");
+                return;
+            }
+
+            logger.error("something happened, I guess");
+            logger.error(ex.toString());
+        }
+    }
 }

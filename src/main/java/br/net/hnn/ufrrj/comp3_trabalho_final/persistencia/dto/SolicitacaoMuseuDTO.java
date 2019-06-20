@@ -74,7 +74,8 @@ public final class SolicitacaoMuseuDTO {
         private String nomeGestor;
         private String senhaGestor;
 
-        public SolicitacaoMuseuDTOBuilder() {}
+        public SolicitacaoMuseuDTOBuilder() {
+        }
 
         public SolicitacaoMuseuDTOBuilder(@NotNull SolicitacaoMuseuDTO dto) {
             this.id = dto.getId();

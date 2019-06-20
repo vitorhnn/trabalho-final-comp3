@@ -26,6 +26,7 @@ public class MockSolicitacaoMuseuTableGateway implements SolicitacaoMuseuTableGa
                 .build()
         );
     }
+
     @Override
     public Optional<SolicitacaoMuseuDTO> getSolicitacaoMuseuById(int id) {
         return Optional.ofNullable(mockStorage.get(id));

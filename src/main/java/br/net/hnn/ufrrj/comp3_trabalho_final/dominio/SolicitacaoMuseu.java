@@ -32,7 +32,8 @@ public class SolicitacaoMuseu extends HttpServlet {
 
         try {
             cmd.execute();
-        } catch (Exception ignored) {
+        } catch (Exception ex) {
+            throw new ServletException(ex);
         }
     }
 }
