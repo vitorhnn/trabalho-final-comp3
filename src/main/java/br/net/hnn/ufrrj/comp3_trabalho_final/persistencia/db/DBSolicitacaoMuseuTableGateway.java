@@ -92,7 +92,7 @@ public class DBSolicitacaoMuseuTableGateway implements SolicitacaoMuseuTableGate
         insertStatement.clearParameters();
 
         insertStatement.setString(1, dto.getNome());
-        insertStatement.setDate(2, Date.valueOf(dto.getDataCriacao()));
+        insertStatement.setString(2, dto.getDataCriacao());
         insertStatement.setString(3, dto.getCidade());
         insertStatement.setString(4, dto.getEstado());
         insertStatement.setString(5, dto.getCpfGestor());
