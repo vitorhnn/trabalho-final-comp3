@@ -19,10 +19,9 @@ public class SolicitacaoMuseuServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-        LocalDate dataCriacao = LocalDate.parse(req.getParameter("dataCriacao"), DateTimeFormatter.ISO_LOCAL_DATE);
         Command cmd = new CriarSolicitacaoMuseuCommand(
                 req.getParameter("nomeMuseu"),
-                dataCriacao,
+                req.getParameter("dataCriacao"),
                 req.getParameter("cidade"),
                 req.getParameter("estado"),
                 req.getParameter("cpfGestor"),

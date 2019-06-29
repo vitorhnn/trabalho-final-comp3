@@ -9,7 +9,7 @@ public final class SolicitacaoMuseuDTO {
 
     private String nome;
 
-    private LocalDate dataCriacao;
+    private String dataCriacao;
 
     private String cidade;
 
@@ -21,7 +21,7 @@ public final class SolicitacaoMuseuDTO {
 
     private String senhaGestor;
 
-    private SolicitacaoMuseuDTO(int id, String nome, LocalDate dataCriacao, String cidade, String estado, String cpfGestor, String nomeGestor, String senhaGestor) {
+    private SolicitacaoMuseuDTO(int id, String nome, String dataCriacao, String cidade, String estado, String cpfGestor, String nomeGestor, String senhaGestor) {
         this.id = id;
         this.nome = nome;
         this.dataCriacao = dataCriacao;
@@ -40,7 +40,7 @@ public final class SolicitacaoMuseuDTO {
         return nome;
     }
 
-    public LocalDate getDataCriacao() {
+    public String getDataCriacao() {
         return dataCriacao;
     }
 
@@ -67,7 +67,7 @@ public final class SolicitacaoMuseuDTO {
     public static class SolicitacaoMuseuDTOBuilder {
         private int id;
         private String nome;
-        private LocalDate dataCriacao;
+        private String dataCriacao;
         private String cidade;
         private String estado;
         private String cpfGestor;
@@ -98,7 +98,7 @@ public final class SolicitacaoMuseuDTO {
             return this;
         }
 
-        public SolicitacaoMuseuDTOBuilder setDataCriacao(LocalDate dataCriacao) {
+        public SolicitacaoMuseuDTOBuilder setDataCriacao(String dataCriacao) {
             this.dataCriacao = dataCriacao;
             return this;
         }

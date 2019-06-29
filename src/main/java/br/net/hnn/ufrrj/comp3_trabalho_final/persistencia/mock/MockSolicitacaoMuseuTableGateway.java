@@ -23,7 +23,7 @@ public class MockSolicitacaoMuseuTableGateway implements SolicitacaoMuseuTableGa
                 .setNome("Departamento de Ciência da Computação")
                 .setCidade("Nova Iguaçu")
                 .setEstado("Rio de Janeiro")
-                .setDataCriacao(LocalDate.now())
+                .setDataCriacao("1998-01-16")
                 .setCpfGestor("111111")
                 .setNomeGestor("Victor Hermann Chiletto")
                 .setSenhaGestor("senhavaiaqui")

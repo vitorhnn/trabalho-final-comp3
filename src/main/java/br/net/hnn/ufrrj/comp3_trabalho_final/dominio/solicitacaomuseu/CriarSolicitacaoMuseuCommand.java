@@ -15,7 +15,7 @@ public class CriarSolicitacaoMuseuCommand implements Command<Void, SQLException>
 
     public CriarSolicitacaoMuseuCommand(
             String nome,
-            LocalDate dataCriacao,
+            String dataCriacao,
             String cidade,
             String estado,
             String cpfGestor,
