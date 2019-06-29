@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sistema de gerenciamento de museus do Duarte</title>
+    <title>Sistema de Gerenciamento de Museus do Duarte - Solicitação Inválida</title>
 </head>
 <body>
 <h1>A solicitação é inválida!</h1>

@@ -29,10 +29,14 @@ public class CriarMuseuServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        Command<Void, Exception> verificarSolicitacaoCommand = new VerificarSolicitacaoMuseuCommand(Integer.parseInt(req.getParameter("id")));
+        int idSolicitacao = Integer.parseInt(req.getParameter("id"));
+        Command<SolicitacaoMuseuDTO, Exception> verificarSolicitacaoCommand = new VerificarSolicitacaoMuseuCommand(idSolicitacao);
 
         try {
-            verificarSolicitacaoCommand.execute();
+            SolicitacaoMuseuDTO solicitacaoValida = verificarSolicitacaoCommand.execute();
+
+            req.getSession().setAttribute("solicitacao", solicitacaoValida);
+            res.sendRedirect("/criar-gestor");
         } catch (SolicitacaoNaoExisteException ex) {
             res.sendError(HttpServletResponse.SC_BAD_REQUEST, "Solicitação não existe");
         } catch (SolicitacaoInvalidaException sie) {

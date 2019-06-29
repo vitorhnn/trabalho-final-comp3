@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class VerificarSolicitacaoMuseuCommand implements Command<Void, Exception> {
+public class VerificarSolicitacaoMuseuCommand implements Command<SolicitacaoMuseuDTO, Exception> {
     private SolicitacaoMuseuTableGateway solicitacaoMuseuTableGateway = ServiceLocator.getInstance().getSolicitacaoMuseuTableGateway();
 
     private int solicitacaoId;
@@ -21,7 +21,7 @@ public class VerificarSolicitacaoMuseuCommand implements Command<Void, Exception
     }
 
     @Override
-    public Void execute() throws Exception {
+    public SolicitacaoMuseuDTO execute() throws Exception {
         SolicitacaoMuseuDTO solicitacao = solicitacaoMuseuTableGateway
                 .getSolicitacaoMuseuById(solicitacaoId)
                 .orElseThrow(() -> new SolicitacaoNaoExisteException(solicitacaoId));
@@ -48,6 +48,6 @@ public class VerificarSolicitacaoMuseuCommand implements Command<Void, Exception
         }
 
 
-        return null;
+        return solicitacao;
     }
 }
