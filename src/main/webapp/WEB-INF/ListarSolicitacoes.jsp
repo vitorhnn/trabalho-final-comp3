@@ -30,6 +30,7 @@
             <td>
                 <form id="solicitacao-<%= solicitacao.getId() %>-form" action="criar-museu" method="post">
                     <input type="hidden" name="id" value="<%= solicitacao.getId() %>"/>
+                    <input type="hidden" name="cmd" value="Verifica"/>
                 </form>
             </td>
             <td><%= solicitacao.getNome() %></td>

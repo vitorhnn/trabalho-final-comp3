@@ -4,6 +4,7 @@ import br.net.hnn.ufrrj.comp3_trabalho_final.dominio.Command;
 import br.net.hnn.ufrrj.comp3_trabalho_final.dominio.criarmuseu.exception.SolicitacaoInvalidaException;
 import br.net.hnn.ufrrj.comp3_trabalho_final.dominio.criarmuseu.exception.SolicitacaoNaoExisteException;
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.dto.SolicitacaoMuseuDTO;
+import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.dto.UsuarioDTO;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,34 +17,52 @@ import java.util.List;
 public class CriarMuseuServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        List<SolicitacaoMuseuDTO> solicitacoes;
-        try {
-            solicitacoes = new ListarSolicitacoesMuseuCommand().execute();
-        } catch (SQLException ex) {
-            throw new ServletException(ex);
-        }
+        UsuarioDTO maybeGestor = (UsuarioDTO) req.getSession().getAttribute("gestor");
 
-        req.setAttribute("solicitacoes", solicitacoes);
-        req.getRequestDispatcher("/WEB-INF/ListarSolicitacoes.jsp").forward(req, res);
+        if (maybeGestor != null) {
+            req.getRequestDispatcher("/WEB-INF/CriarMuseu.jsp").forward(req, res);
+        } else {
+            List<SolicitacaoMuseuDTO> solicitacoes;
+            try {
+                solicitacoes = new ListarSolicitacoesMuseuCommand().execute();
+            } catch (SQLException ex) {
+                throw new ServletException(ex);
+            }
+
+            req.setAttribute("solicitacoes", solicitacoes);
+            req.getRequestDispatcher("/WEB-INF/ListarSolicitacoes.jsp").forward(req, res);
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        int idSolicitacao = Integer.parseInt(req.getParameter("id"));
-        Command<SolicitacaoMuseuDTO, Exception> verificarSolicitacaoCommand = new VerificarSolicitacaoMuseuCommand(idSolicitacao);
+        String cmd = req.getParameter("cmd");
 
-        try {
-            SolicitacaoMuseuDTO solicitacaoValida = verificarSolicitacaoCommand.execute();
+        switch (cmd) {
+            case "Verifica": {
+                int idSolicitacao = Integer.parseInt(req.getParameter("id"));
+                Command<SolicitacaoMuseuDTO, Exception> verificarSolicitacaoCommand = new VerificarSolicitacaoMuseuCommand(idSolicitacao);
 
-            req.getSession().setAttribute("solicitacao", solicitacaoValida);
-            res.sendRedirect("/criar-gestor");
-        } catch (SolicitacaoNaoExisteException ex) {
-            res.sendError(HttpServletResponse.SC_BAD_REQUEST, "Solicitação não existe");
-        } catch (SolicitacaoInvalidaException sie) {
-            req.setAttribute("excecao", sie);
-            req.getRequestDispatcher("/WEB-INF/SolicitacaoInvalida.jsp").forward(req, res);
-        } catch (Exception ex) {
-            throw new ServletException(ex);
+                try {
+                    SolicitacaoMuseuDTO solicitacaoValida = verificarSolicitacaoCommand.execute();
+
+                    req.getSession().setAttribute("solicitacao", solicitacaoValida);
+                    res.sendRedirect("/criar-gestor");
+                } catch (SolicitacaoNaoExisteException ex) {
+                    res.sendError(HttpServletResponse.SC_BAD_REQUEST, "Solicitação não existe");
+                } catch (SolicitacaoInvalidaException sie) {
+                    req.setAttribute("excecao", sie);
+                    req.getRequestDispatcher("/WEB-INF/SolicitacaoInvalida.jsp").forward(req, res);
+                } catch (Exception ex) {
+                    throw new ServletException(ex);
+                }
+                break;
+            }
+            case "Insere": {
+                break;
+            }
+            default:
+                throw new ServletException("Comando desconhecido");
         }
     }
 }

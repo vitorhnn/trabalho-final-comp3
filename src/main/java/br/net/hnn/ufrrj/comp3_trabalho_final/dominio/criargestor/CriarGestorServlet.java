@@ -30,12 +30,14 @@ public class CriarGestorServlet extends HttpServlet {
             switch (cmd) {
                 case "Verifica": {
                     new VerificaCriarGestorCommand(solicitacao).execute();
-                    req.getRequestDispatcher("/WEB-INF/ConfirmaGestor.jsp");
+                    req.getRequestDispatcher("/WEB-INF/ConfirmaGestor.jsp").forward(req, res);
+                    break;
                 }
                 case "Insere": {
                     UsuarioDTO gestorInserido = new CriarGestorCommand(solicitacao).execute();
-                    req.getSession().setAttribute("gestorInserido", gestorInserido);
+                    req.getSession().setAttribute("gestor", gestorInserido);
                     res.sendRedirect("/criar-museu");
+                    break;
                 }
                 default:
                     throw new ServletException("Comando desconhecido");
