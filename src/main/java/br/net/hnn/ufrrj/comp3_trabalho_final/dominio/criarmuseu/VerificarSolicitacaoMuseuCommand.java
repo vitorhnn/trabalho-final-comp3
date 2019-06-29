@@ -26,18 +26,15 @@ public class VerificarSolicitacaoMuseuCommand implements Command<SolicitacaoMuse
                 .getSolicitacaoMuseuById(solicitacaoId)
                 .orElseThrow(() -> new SolicitacaoNaoExisteException(solicitacaoId));
 
-        if (solicitacao.getNome().trim().equals("")) {
+        if (solicitacao.getNome().trim().isEmpty()) {
             throw new SolicitacaoInvalidaException(solicitacao, "Nome do museu vazio!");
         }
-        if (solicitacao.getNomeGestor().trim().equals("")) {
-            throw new SolicitacaoInvalidaException(solicitacao, "Nome do gestor vazio!");
-        }
 
-        if (solicitacao.getCidade().trim().equals("")) {
+        if (solicitacao.getCidade().trim().isEmpty()) {
             throw new SolicitacaoInvalidaException(solicitacao, "Nome da cidade vazio!");
         }
 
-        if (solicitacao.getEstado().trim().equals("")) {
+        if (solicitacao.getEstado().trim().isEmpty()) {
             throw new SolicitacaoInvalidaException(solicitacao, "Nome do estado vazio!");
         }
 
@@ -46,7 +43,6 @@ public class VerificarSolicitacaoMuseuCommand implements Command<SolicitacaoMuse
         } catch (DateTimeParseException dtpe) {
             throw new SolicitacaoInvalidaException(solicitacao, "Data inválida!");
         }
-
 
         return solicitacao;
     }

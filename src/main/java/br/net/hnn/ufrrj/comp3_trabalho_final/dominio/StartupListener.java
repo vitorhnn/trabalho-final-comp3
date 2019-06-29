@@ -1,10 +1,7 @@
 package br.net.hnn.ufrrj.comp3_trabalho_final.dominio;
 
 import br.net.hnn.ufrrj.comp3_trabalho_final.ServiceLocator;
-import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.db.DBMuseuTableGateway;
-import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.db.DBSolicitacaoMuseuTableGateway;
-import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.db.DBUsuarioTableGateway;
-import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.db.DatabaseConnectionSingleton;
+import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.db.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,6 +54,7 @@ public class StartupListener implements ServletContextListener {
             sl.provide(new DBMuseuTableGateway());
             sl.provide(new DBUsuarioTableGateway());
             sl.provide(new DBSolicitacaoMuseuTableGateway());
+            sl.provide(new DBGestorTableGateway());
         } catch (SQLException ex) {
             logger.error("failed to provide one of the table gateways");
             throw new RuntimeException(ex);

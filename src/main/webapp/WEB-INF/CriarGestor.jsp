@@ -13,7 +13,7 @@
 <form action="criar-gestor" method="post">
     Nome do gestor: <%= solicitacao.getNomeGestor() %><br/>
     CPF do gestor: <%= solicitacao.getCpfGestor() %><br/>
-    <input type="hidden" value="<%= solicitacao.getId() %>" name="id"/>
+    <input type="hidden" value="Insere" name="cmd"/>
     <input type="submit" value="Confirmar"/>
 </form>
 </body>

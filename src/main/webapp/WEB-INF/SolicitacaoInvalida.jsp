@@ -10,7 +10,7 @@
 </head>
 <body>
 <h1>A solicitação é inválida!</h1>
-<p>A solicitação era inválida: <%= excecao.getMotivo() %></p>
+<p>A solicitação é inválida: <%= excecao.getMotivo() %></p>
 <a href="/criar-museu">Clique aqui para voltar a listagem de solicitações</a>
 </body>
 </html>

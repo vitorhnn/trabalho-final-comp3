@@ -1,5 +1,6 @@
 package br.net.hnn.ufrrj.comp3_trabalho_final;
 
+import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.GestorTableGateway;
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.MuseuTableGateway;
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.SolicitacaoMuseuTableGateway;
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.UsuarioTableGateway;
@@ -13,6 +14,8 @@ public class ServiceLocator {
     private UsuarioTableGateway usuarioTableGateway;
 
     private SolicitacaoMuseuTableGateway solicitacaoMuseuTableGateway;
+
+    private GestorTableGateway gestorTableGateway;
 
     private ServiceLocator() {}
 
@@ -32,6 +35,10 @@ public class ServiceLocator {
         this.solicitacaoMuseuTableGateway = solicitacaoMuseuTableGateway;
     }
 
+    public void provide(@NotNull GestorTableGateway gestorTableGateway) {
+        this.gestorTableGateway = gestorTableGateway;
+    }
+
     public MuseuTableGateway getMuseuTableGateway() {
         return museuTableGateway;
     }
@@ -42,5 +49,9 @@ public class ServiceLocator {
 
     public SolicitacaoMuseuTableGateway getSolicitacaoMuseuTableGateway() {
         return solicitacaoMuseuTableGateway;
+    }
+
+    public GestorTableGateway getGestorTableGateway() {
+        return gestorTableGateway;
     }
 }
