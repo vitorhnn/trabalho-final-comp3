@@ -2,8 +2,6 @@ package br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.dto;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.time.LocalDate;
-
 public final class SolicitacaoMuseuDTO {
     private int id;
 

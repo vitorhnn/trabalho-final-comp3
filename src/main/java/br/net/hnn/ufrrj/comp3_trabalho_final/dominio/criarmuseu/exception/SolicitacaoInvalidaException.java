@@ -4,12 +4,18 @@ import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.dto.SolicitacaoMuseuDT
 
 public class SolicitacaoInvalidaException extends Exception {
     private SolicitacaoMuseuDTO solicitacao;
+    private String motivo;
 
-    public SolicitacaoInvalidaException(SolicitacaoMuseuDTO solicitacao) {
+    public SolicitacaoInvalidaException(SolicitacaoMuseuDTO solicitacao, String motivo) {
         this.solicitacao = solicitacao;
+        this.motivo = motivo;
     }
 
     public SolicitacaoMuseuDTO getSolicitacao() {
         return solicitacao;
+    }
+
+    public String getMotivo() {
+        return motivo;
     }
 }

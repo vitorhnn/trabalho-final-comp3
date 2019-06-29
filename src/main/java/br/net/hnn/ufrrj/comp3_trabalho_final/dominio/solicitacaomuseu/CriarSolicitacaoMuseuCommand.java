@@ -6,7 +6,6 @@ import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.SolicitacaoMuseuTableG
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.dto.SolicitacaoMuseuDTO;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 public class CriarSolicitacaoMuseuCommand implements Command<Void, SQLException> {
     private SolicitacaoMuseuTableGateway tableGateway = ServiceLocator.getInstance().getSolicitacaoMuseuTableGateway();

@@ -1,6 +1,7 @@
 package br.net.hnn.ufrrj.comp3_trabalho_final.dominio.criarmuseu;
 
 import br.net.hnn.ufrrj.comp3_trabalho_final.dominio.Command;
+import br.net.hnn.ufrrj.comp3_trabalho_final.dominio.criarmuseu.exception.SolicitacaoInvalidaException;
 import br.net.hnn.ufrrj.comp3_trabalho_final.dominio.criarmuseu.exception.SolicitacaoNaoExisteException;
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.dto.SolicitacaoMuseuDTO;
 
@@ -34,6 +35,9 @@ public class CriarMuseuServlet extends HttpServlet {
             verificarSolicitacaoCommand.execute();
         } catch (SolicitacaoNaoExisteException ex) {
             res.sendError(HttpServletResponse.SC_BAD_REQUEST, "Solicitação não existe");
+        } catch (SolicitacaoInvalidaException sie) {
+            req.setAttribute("excecao", sie);
+            req.getRequestDispatcher("/WEB-INF/SolicitacaoInvalida.jsp").forward(req, res);
         } catch (Exception ex) {
             throw new ServletException(ex);
         }
