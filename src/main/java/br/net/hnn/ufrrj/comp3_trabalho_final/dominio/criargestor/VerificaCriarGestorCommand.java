@@ -3,7 +3,7 @@ package br.net.hnn.ufrrj.comp3_trabalho_final.dominio.criargestor;
 import br.net.hnn.ufrrj.comp3_trabalho_final.ServiceLocator;
 import br.net.hnn.ufrrj.comp3_trabalho_final.dominio.Command;
 import br.net.hnn.ufrrj.comp3_trabalho_final.dominio.criargestor.exception.GestorInvalidoException;
-import br.net.hnn.ufrrj.comp3_trabalho_final.dominio.criargestor.exception.GestorJaExisteException;
+import br.net.hnn.ufrrj.comp3_trabalho_final.dominio.criargestor.exception.UsuarioJaExisteException;
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.UsuarioTableGateway;
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.dto.SolicitacaoMuseuDTO;
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.dto.UsuarioDTO;
@@ -22,11 +22,11 @@ public class VerificaCriarGestorCommand implements Command<Void, Exception> {
     }
 
     @Override
-    public Void execute() throws SQLException, GestorJaExisteException, GestorInvalidoException {
+    public Void execute() throws SQLException, UsuarioJaExisteException, GestorInvalidoException {
         Optional<UsuarioDTO> previamenteCadastrado = usuarioTableGateway.findUsuarioByCpf(solicitacao.getCpfGestor());
 
         if (previamenteCadastrado.isPresent()) {
-            throw new GestorJaExisteException(previamenteCadastrado.get());
+            throw new UsuarioJaExisteException(previamenteCadastrado.get());
         }
 
         if (solicitacao.getNomeGestor().trim().isEmpty()) {

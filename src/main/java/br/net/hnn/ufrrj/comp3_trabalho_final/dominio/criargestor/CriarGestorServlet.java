@@ -1,6 +1,7 @@
 package br.net.hnn.ufrrj.comp3_trabalho_final.dominio.criargestor;
 
 import br.net.hnn.ufrrj.comp3_trabalho_final.dominio.criargestor.exception.GestorInvalidoException;
+import br.net.hnn.ufrrj.comp3_trabalho_final.dominio.criargestor.exception.UsuarioJaExisteException;
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.dto.SolicitacaoMuseuDTO;
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.dto.UsuarioDTO;
 
@@ -29,7 +30,16 @@ public class CriarGestorServlet extends HttpServlet {
         try {
             switch (cmd) {
                 case "Verifica": {
-                    new VerificaCriarGestorCommand(solicitacao).execute();
+                    try {
+                        new VerificaCriarGestorCommand(solicitacao).execute();
+                    } catch (GestorInvalidoException gie) {
+                        req.setAttribute("excecao", gie);
+                        req.getRequestDispatcher("/WEB-INF/GestorInvalido.jsp").forward(req, res);
+                    } catch (UsuarioJaExisteException ujee) {
+                        req.getSession().setAttribute("usuario", ujee.getUsuario());
+                        req.getRequestDispatcher("/WEB-INF/UsuarioJaExiste.jsp").forward(req, res);
+                    }
+
                     req.getRequestDispatcher("/WEB-INF/ConfirmaGestor.jsp").forward(req, res);
                     break;
                 }
@@ -39,12 +49,15 @@ public class CriarGestorServlet extends HttpServlet {
                     res.sendRedirect("/criar-museu");
                     break;
                 }
+                case "Transforma": {
+                    UsuarioDTO usuario = (UsuarioDTO) req.getSession().getAttribute("usuario");
+                    new TransformaUsuarioGestorCommand(usuario).execute();
+                    req.getSession().setAttribute("gestor", usuario);
+                    res.sendRedirect("/criar-museu");
+                }
                 default:
                     throw new ServletException("Comando desconhecido");
             }
-        } catch (GestorInvalidoException gie) {
-            req.setAttribute("excecao", gie);
-            req.getRequestDispatcher("/WEB-INF/GestorInvalido.jsp").forward(req, res);
         } catch (Exception ex) {
             throw new ServletException(ex);
         }

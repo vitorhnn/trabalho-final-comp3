@@ -74,14 +74,19 @@ public class DBGestorTableGateway implements GestorTableGateway {
         rs.next();
         int generatedId = rs.getInt(1);
 
+        promoveUsuario(generatedId);
+
+        return generatedId;
+    }
+
+    @Override
+    public void promoveUsuario(int usuarioId) throws SQLException {
         insertFuncionarioStmt.clearParameters();
-        insertFuncionarioStmt.setInt(1, generatedId);
+        insertFuncionarioStmt.setInt(1, usuarioId);
         insertFuncionarioStmt.executeUpdate();
 
         insertGestorStmt.clearParameters();
-        insertGestorStmt.setInt(1, generatedId);
+        insertGestorStmt.setInt(1, usuarioId);
         insertGestorStmt.executeUpdate();
-
-        return generatedId;
     }
 }

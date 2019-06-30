@@ -10,9 +10,9 @@
     <label for="dataCriacao">Data de criação:</label><input type="date" id="dataCriacao" name="dataCriacao"/><br/>
     <label for="cidade">Cidade:</label><input type="text" id="cidade" name="cidade"/><br/>
     <label for="estado">Estado:</label><input type="text" id="estado" name="estado"/><br/>
-    <label for="nomeGestor">Nome do gestor:</label><input type="text" id="nomeGestor" name="nomeGestor"/><br/>
-    <label for="cpfGestor">CPF do gestor:</label><input type="text" id="cpfGestor" name="cpfGestor"/><br/>
-    <label for="senhaGestor">Senha do gestor:</label><input type="password" id="senhaGestor" name="senhaGestor"/><br/>
+    <label for="nomeGestor">Nome do usuario:</label><input type="text" id="nomeGestor" name="nomeGestor"/><br/>
+    <label for="cpfGestor">CPF do usuario:</label><input type="text" id="cpfGestor" name="cpfGestor"/><br/>
+    <label for="senhaGestor">Senha do usuario:</label><input type="password" id="senhaGestor" name="senhaGestor"/><br/>
     <input type="submit" value="Enviar"/>
 </form>
 </body>

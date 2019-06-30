@@ -9,4 +9,6 @@ public interface GestorTableGateway {
     Optional<UsuarioDTO> findGestorByCpf(String cpf) throws SQLException;
 
     int insert(UsuarioDTO gestor) throws SQLException;
+
+    void promoveUsuario(int usuarioId) throws SQLException;
 }

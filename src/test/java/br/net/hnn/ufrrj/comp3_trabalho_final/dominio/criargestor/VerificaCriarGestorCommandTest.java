@@ -2,7 +2,7 @@ package br.net.hnn.ufrrj.comp3_trabalho_final.dominio.criargestor;
 
 import br.net.hnn.ufrrj.comp3_trabalho_final.ServiceLocator;
 import br.net.hnn.ufrrj.comp3_trabalho_final.dominio.criargestor.exception.GestorInvalidoException;
-import br.net.hnn.ufrrj.comp3_trabalho_final.dominio.criargestor.exception.GestorJaExisteException;
+import br.net.hnn.ufrrj.comp3_trabalho_final.dominio.criargestor.exception.UsuarioJaExisteException;
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.dto.SolicitacaoMuseuDTO;
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.mock.MockUsuarioTableGateway;
 import org.junit.Before;
@@ -21,7 +21,7 @@ public class VerificaCriarGestorCommandTest {
         ServiceLocator.getInstance().provide(mock);
     }
 
-    @Test(expected = GestorJaExisteException.class)
+    @Test(expected = UsuarioJaExisteException.class)
     public void testUsuarioExistente() throws Exception {
         SolicitacaoMuseuDTO solicitacao = new SolicitacaoMuseuDTO.SolicitacaoMuseuDTOBuilder()
                 .setCpfGestor("63066661253")
