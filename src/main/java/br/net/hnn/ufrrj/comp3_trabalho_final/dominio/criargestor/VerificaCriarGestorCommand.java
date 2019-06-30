@@ -18,8 +18,6 @@ public class VerificaCriarGestorCommand implements Command<Void, Exception> {
 
     private UsuarioTableGateway usuarioTableGateway = ServiceLocator.getInstance().getUsuarioTableGateway();
 
-    private GestorTableGateway gestorTableGateway = ServiceLocator.getInstance().getGestorTableGateway();
-
     public VerificaCriarGestorCommand(SolicitacaoMuseuDTO solicitacao) {
         this.solicitacao = solicitacao;
     }
@@ -48,6 +46,9 @@ public class VerificaCriarGestorCommand implements Command<Void, Exception> {
             throw new GestorInvalidoException(solicitacao, "CPF inválido!");
         }
 
+        if (!isValidSenha(solicitacao.getSenhaGestor().trim())) {
+            throw new GestorInvalidoException(solicitacao, "Senha inválida!");
+        }
         return null;
     }
 
@@ -87,5 +88,9 @@ public class VerificaCriarGestorCommand implements Command<Void, Exception> {
         dvCalculado2 = (dvCalculado2 * 10) % 11;
 
         return dv1 == dvCalculado1 && dv2 == dvCalculado2;
+    }
+
+    static boolean isValidSenha(String senha) {
+        return senha.length() == 6 && senha.matches("[a-zA-Z0-9]*");
     }
 }
