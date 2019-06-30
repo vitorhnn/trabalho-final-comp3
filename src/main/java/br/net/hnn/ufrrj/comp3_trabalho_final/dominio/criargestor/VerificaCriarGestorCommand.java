@@ -38,7 +38,7 @@ public class VerificaCriarGestorCommand implements Command<Void, Exception> {
         }
 
         if (solicitacao.getSenhaGestor().trim().isEmpty()) {
-            throw new GestorInvalidoException(solicitacao, "Senha vazia");
+            throw new GestorInvalidoException(solicitacao, "Senha vazia!");
         }
 
         if (!isValidCpf(solicitacao.getCpfGestor().trim())) {

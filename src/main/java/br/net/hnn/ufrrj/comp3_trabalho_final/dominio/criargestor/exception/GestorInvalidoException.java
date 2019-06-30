@@ -6,7 +6,7 @@ public class GestorInvalidoException extends Exception {
     private SolicitacaoMuseuDTO solicitacao;
     private String motivo;
 
-    public GestorInvalidoException(SolicitacaoMuseuDTO solicitacao, String motivoj) {
+    public GestorInvalidoException(SolicitacaoMuseuDTO solicitacao, String motivo) {
         this.solicitacao = solicitacao;
         this.motivo = motivo;
     }
