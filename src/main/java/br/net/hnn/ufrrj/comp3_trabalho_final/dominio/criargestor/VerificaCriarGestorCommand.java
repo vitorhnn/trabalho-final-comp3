@@ -4,7 +4,6 @@ import br.net.hnn.ufrrj.comp3_trabalho_final.ServiceLocator;
 import br.net.hnn.ufrrj.comp3_trabalho_final.dominio.Command;
 import br.net.hnn.ufrrj.comp3_trabalho_final.dominio.criargestor.exception.GestorInvalidoException;
 import br.net.hnn.ufrrj.comp3_trabalho_final.dominio.criargestor.exception.GestorJaExisteException;
-import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.GestorTableGateway;
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.UsuarioTableGateway;
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.dto.SolicitacaoMuseuDTO;
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.dto.UsuarioDTO;

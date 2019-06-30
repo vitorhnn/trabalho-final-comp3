@@ -3,12 +3,15 @@ package br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.mock;
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.MuseuTableGateway;
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.dto.MuseuDTO;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Optional;
 
 public class MockMuseuTableGateway implements MuseuTableGateway {
     private HashMap<Integer, MuseuDTO> mockStorage;
+
+    private int sequential = 2;
 
     public MockMuseuTableGateway() {
         mockStorage = new HashMap<>();
@@ -26,5 +29,23 @@ public class MockMuseuTableGateway implements MuseuTableGateway {
     @Override
     public Optional<MuseuDTO> findMuseuById(int id) {
         return Optional.ofNullable(mockStorage.get(id));
+    }
+
+    @Override
+    public int insert(MuseuDTO museu) throws SQLException {
+        MuseuDTO toInsert = new MuseuDTO.MuseuDTOBuilder()
+                .setId(sequential)
+                .setNome(museu.getNome())
+                .setCidade(museu.getCidade())
+                .setEstado(museu.getEstado())
+                .setDataCriacao(museu.getDataCriacao())
+                .setIdGestor(museu.getIdGestor())
+                .build();
+
+        mockStorage.put(sequential, toInsert);
+
+        sequential++;
+
+        return sequential;
     }
 }

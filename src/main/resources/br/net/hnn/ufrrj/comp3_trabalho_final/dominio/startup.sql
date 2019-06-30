@@ -126,10 +126,14 @@ CREATE TABLE Avaliacao(
 🤔
 
 CREATE TABLE Museu(
-    id INTEGER PRIMARY KEY,
+    id INTEGER PRIMARY KEY
+    GENERATED ALWAYS AS IDENTITY
+    (START with 1, INCREMENT BY 1),
+
     nome VARCHAR(255) NOT NULL,
     cidade VARCHAR(255) NOT NULL,
     estado VARCHAR(255) NOT NULL,
+    dataCriacao DATE NOT NULL,
     idGestor INTEGER NOT NULL,
 
     FOREIGN KEY (idGestor)

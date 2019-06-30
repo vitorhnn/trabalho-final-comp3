@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 public class CriarMuseuServlet extends HttpServlet {
@@ -59,6 +60,16 @@ public class CriarMuseuServlet extends HttpServlet {
                 break;
             }
             case "Insere": {
+                SolicitacaoMuseuDTO solicitacao = (SolicitacaoMuseuDTO) req.getSession().getAttribute("solicitacao");
+                UsuarioDTO gestor = (UsuarioDTO) req.getSession().getAttribute("gestor");
+
+                try {
+                    new CriarMuseuCommand(solicitacao, gestor).execute();
+                } catch (DateTimeParseException ignored) {
+                    // nunca deveria acontecer, visto que verificamos a solicitação anteriormente
+                } catch (Exception ex) {
+                    throw new ServletException(ex);
+                }
                 break;
             }
             default:

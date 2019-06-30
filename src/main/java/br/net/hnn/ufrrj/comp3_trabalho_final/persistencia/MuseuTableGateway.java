@@ -7,4 +7,6 @@ import java.util.Optional;
 
 public interface MuseuTableGateway {
     Optional<MuseuDTO> findMuseuById(int id) throws SQLException;
+
+    int insert(MuseuDTO museu) throws SQLException;
 }
