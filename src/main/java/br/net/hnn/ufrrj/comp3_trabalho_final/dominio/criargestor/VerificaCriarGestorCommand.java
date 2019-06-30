@@ -83,9 +83,13 @@ public class VerificaCriarGestorCommand implements Command<Void, Exception> {
 
         dvCalculado1 = (dvCalculado1 * 10) % 11;
 
+        dvCalculado1 = dvCalculado1 == 10 ? 0 : dvCalculado1;
+
         dvCalculado2 += dvCalculado1 * 2;
 
         dvCalculado2 = (dvCalculado2 * 10) % 11;
+
+        dvCalculado2 = dvCalculado2 == 10 ? 0 : dvCalculado2;
 
         return dv1 == dvCalculado1 && dv2 == dvCalculado2;
     }

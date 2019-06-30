@@ -10,6 +10,9 @@ public class VerificaCriarGestorCommandTest {
     @Test
     public void testValidarCpf() {
         assertTrue(isValidCpf("63066661253"));
+        assertTrue(isValidCpf("23786695008"));
+        assertTrue(isValidCpf("15858608086"));
+        assertTrue(isValidCpf("56485336087"));
 
         assertFalse(isValidCpf("11111111111"));
         assertFalse(isValidCpf("12345678912"));
