@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     SolicitacaoMuseuDTO solicitacao = (SolicitacaoMuseuDTO) request.getSession().getAttribute("solicitacao");
-    UsuarioDTO usuario = (UsuarioDTO) request.getSession().getAttribute("usuario");
+    UsuarioDTO gestor = (UsuarioDTO) request.getSession().getAttribute("gestor");
 %>
 <!DOCTYPE html>
 <html>
@@ -14,7 +14,7 @@
 <h1>Confirma esse museu?</h1>
 <form action="criar-museu" method="post">
     Nome do museu: <%= solicitacao.getNome() %><br/>
-    Nome do usuario: <%= usuario.getNome() %><br/>
+    Nome do gestor: <%= gestor.getNome() %><br/>
     <input type="hidden" value="Insere" name="cmd"/>
     <input type="submit" value="Confirmar"/>
 </form>

@@ -19,7 +19,7 @@
             <th>Nome</th>
             <th>Data de criação</th>
             <th>Cidade</th>
-            <th>CPF do usuario</th>
+            <th>CPF do gestor</th>
         </tr>
 
         <%

@@ -2,6 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     SolicitacaoMuseuDTO solicitacao = (SolicitacaoMuseuDTO) request.getSession().getAttribute("solicitacao");
+    String comando = (String) request.getAttribute("comando");
 %>
 <!DOCTYPE html>
 <html>
@@ -9,12 +10,12 @@
     <title>Sistema de Gerenciamento de Museus do Duarte - Criar Gestor</title>
 </head>
 <body>
-<h1>Confirma esse usuario?</h1>
+<h1>Confirma esse gestor?</h1>
 <form action="criar-gestor" method="post">
-    Nome do usuario: <%= solicitacao.getNomeGestor() %><br/>
-    CPF do usuario: <%= solicitacao.getCpfGestor() %><br/>
-    <input type="hidden" value="Verifica" name="cmd"/>
-    <input type="submit" value="Confirmar"/>
+    Nome do gestor: <%= solicitacao.getNomeGestor() %><br/>
+    CPF do gestor: <%= solicitacao.getCpfGestor() %><br/>
+    <input type="hidden" value="<%= comando %>" name="cmd"/>
+    <input type="submit" value="<%= comando %>"/>
 </form>
 </body>
 </html>

@@ -18,6 +18,7 @@ public class CriarGestorServlet extends HttpServlet {
 
         if (solicitacao != null) {
             req.setAttribute("solicitacao", solicitacao);
+            req.setAttribute("comando", "Verifica");
             req.getRequestDispatcher("/WEB-INF/CriarGestor.jsp").forward(req, res);
         }
     }
@@ -40,10 +41,18 @@ public class CriarGestorServlet extends HttpServlet {
                         req.getRequestDispatcher("/WEB-INF/UsuarioJaExiste.jsp").forward(req, res);
                     }
 
-                    req.getRequestDispatcher("/WEB-INF/ConfirmaGestor.jsp").forward(req, res);
+                    req.getSession().setAttribute("usuarioVerificado", true);
+                    req.setAttribute("comando", "Insere");
+                    req.getRequestDispatcher("/WEB-INF/CriarGestor.jsp").forward(req, res);
                     break;
                 }
                 case "Insere": {
+                    boolean verificado = (Boolean) req.getSession().getAttribute("usuarioVerificado");
+
+                    if (!verificado) {
+                        throw new ServletException("Insere com usuário não verificado?");
+                    }
+
                     UsuarioDTO gestorInserido = new CriarGestorCommand(solicitacao).execute();
                     req.getSession().setAttribute("gestor", gestorInserido);
                     res.sendRedirect("/criar-museu");
