@@ -1,5 +1,6 @@
 package br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.db;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,17 +31,9 @@ public class DatabaseConnectionSingleton {
             throw new RuntimeException("failed to initialize derby");
         }
 
-        try {
-            logger.info("opening database properties file");
-            InputStream propertiesStream = this.getClass().getResourceAsStream("db.properties");
-            Properties dbConnProps = new Properties();
-            dbConnProps.load(propertiesStream);
+        logger.info("reading dbstring from env");
 
-            dbString = dbConnProps.getProperty("dbString");
-        } catch (IOException ex) {
-            logger.error("failed to load db properties");
-            throw new RuntimeException("failed to load db properties");
-        }
+        dbString = Dotenv.configure().ignoreIfMissing().load().get("DB_STRING");
 
         ensureDatabaseStructure();
     }

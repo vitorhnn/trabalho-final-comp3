@@ -1,7 +1,6 @@
 package br.net.hnn.ufrrj.comp3_trabalho_final.dominio.criargestor;
 
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.db.DBSolicitacaoMuseuTableGateway;
-import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.db.DBUsuarioTableGateway;
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.db.DatabaseConnectionSingleton;
 import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.dto.SolicitacaoMuseuDTO;
 import org.dbunit.DatabaseTestCase;
@@ -13,7 +12,6 @@ import org.dbunit.operation.DatabaseOperation;
 
 import java.io.InputStream;
 import java.sql.Connection;
-import java.sql.SQLException;
 
 public class VerificaCriarGestorCommandIntegrationTest extends DatabaseTestCase {
     private DBSolicitacaoMuseuTableGateway gateway;
@@ -45,7 +43,7 @@ public class VerificaCriarGestorCommandIntegrationTest extends DatabaseTestCase 
         return DatabaseOperation.NONE;
     }
 
-    public void testNada() throws Exception {
+    public void testCpfValido() throws Exception {
         SolicitacaoMuseuDTO solicitacao = gateway.getSolicitacaoMuseuById(1).orElseThrow(RuntimeException::new);
 
         assertTrue(new VerificaCriarGestorCommand(solicitacao).isValidCpf());
