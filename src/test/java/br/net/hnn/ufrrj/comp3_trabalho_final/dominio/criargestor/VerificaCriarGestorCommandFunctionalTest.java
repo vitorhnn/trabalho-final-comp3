@@ -8,11 +8,9 @@ import br.net.hnn.ufrrj.comp3_trabalho_final.persistencia.mock.MockUsuarioTableG
 import org.junit.Before;
 import org.junit.Test;
 
-import static br.net.hnn.ufrrj.comp3_trabalho_final.dominio.criargestor.VerificaCriarGestorCommand.isValidCpf;
-import static br.net.hnn.ufrrj.comp3_trabalho_final.dominio.criargestor.VerificaCriarGestorCommand.isValidSenha;
 import static org.junit.Assert.*;
 
-public class VerificaCriarGestorCommandTest {
+public class VerificaCriarGestorCommandFunctionalTest {
     private MockUsuarioTableGateway mock;
 
     @Before
@@ -118,27 +116,5 @@ public class VerificaCriarGestorCommandTest {
                 .build();
 
         assertNull(new VerificaCriarGestorCommand(solicitacao).execute());
-    }
-
-    @Test
-    public void testValidarCpf() {
-        assertTrue(isValidCpf("63066661253"));
-        assertTrue(isValidCpf("23786695008"));
-        assertTrue(isValidCpf("15858608086"));
-        assertTrue(isValidCpf("56485336087"));
-
-        assertFalse(isValidCpf("11111111111"));
-        assertFalse(isValidCpf("12345678912"));
-        assertFalse(isValidCpf("1234"));
-    }
-
-    @Test
-    public void testValidarSenha() {
-        assertTrue(isValidSenha("123456"));
-        assertTrue(isValidSenha("123aaa"));
-
-        assertFalse(isValidSenha(""));
-        assertFalse(isValidSenha("123456aaaaaa"));
-        assertFalse(isValidSenha("12345-"));
     }
 }

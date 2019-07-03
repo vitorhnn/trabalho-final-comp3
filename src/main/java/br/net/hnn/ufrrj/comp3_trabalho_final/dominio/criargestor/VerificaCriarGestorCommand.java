@@ -41,17 +41,18 @@ public class VerificaCriarGestorCommand implements Command<Void, Exception> {
             throw new GestorInvalidoException(solicitacao, "Senha vazia!");
         }
 
-        if (!isValidCpf(solicitacao.getCpfGestor().trim())) {
+        if (!isValidCpf()) {
             throw new GestorInvalidoException(solicitacao, "CPF inválido!");
         }
 
-        if (!isValidSenha(solicitacao.getSenhaGestor().trim())) {
+        if (!isValidSenha()) {
             throw new GestorInvalidoException(solicitacao, "Senha inválida!");
         }
         return null;
     }
 
-    static boolean isValidCpf(String cpf) {
+    protected boolean isValidCpf() {
+        String cpf = solicitacao.getCpfGestor().trim();
         if (cpf.length() != 11) {
             return false;
         }
@@ -93,7 +94,8 @@ public class VerificaCriarGestorCommand implements Command<Void, Exception> {
         return dv1 == dvCalculado1 && dv2 == dvCalculado2;
     }
 
-    static boolean isValidSenha(String senha) {
+    protected boolean isValidSenha() {
+        String senha = solicitacao.getSenhaGestor().trim();
         return senha.length() == 6 && senha.matches("[a-zA-Z0-9]*");
     }
 }

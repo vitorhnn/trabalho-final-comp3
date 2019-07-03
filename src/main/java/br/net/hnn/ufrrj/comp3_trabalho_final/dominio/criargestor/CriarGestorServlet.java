@@ -36,9 +36,11 @@ public class CriarGestorServlet extends HttpServlet {
                     } catch (GestorInvalidoException gie) {
                         req.setAttribute("excecao", gie);
                         req.getRequestDispatcher("/WEB-INF/GestorInvalido.jsp").forward(req, res);
+                        return;
                     } catch (UsuarioJaExisteException ujee) {
                         req.getSession().setAttribute("usuario", ujee.getUsuario());
                         req.getRequestDispatcher("/WEB-INF/UsuarioJaExiste.jsp").forward(req, res);
+                        return;
                     }
 
                     req.getSession().setAttribute("usuarioVerificado", true);
@@ -63,6 +65,7 @@ public class CriarGestorServlet extends HttpServlet {
                     new TransformaUsuarioGestorCommand(usuario).execute();
                     req.getSession().setAttribute("gestor", usuario);
                     res.sendRedirect("/criar-museu");
+                    break;
                 }
                 default:
                     throw new ServletException("Comando desconhecido");
