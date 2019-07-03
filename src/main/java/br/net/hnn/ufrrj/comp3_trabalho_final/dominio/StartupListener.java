@@ -7,13 +7,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class StartupListener implements ServletContextListener {
@@ -22,30 +15,6 @@ public class StartupListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         logger.info("context initialized");
-        URL resource = this.getClass().getResource("startup.sql");
-        try {
-            String fileContents = new String(Files.readAllBytes(Paths.get(resource.toURI())));
-
-            String[] statements = fileContents.split("🤔");
-            Connection con = DatabaseConnectionSingleton.getInstance().getConnection();
-
-            for (String statement : statements) {
-                PreparedStatement ps = con.prepareStatement(statement);
-                ps.executeUpdate();
-            }
-
-        } catch (SQLException ex) {
-            if (ex.getSQLState().equals("X0Y32")) {
-                logger.info("some table already existed. not that it really matters");
-            } else {
-                logger.error("some sql problem");
-                throw new RuntimeException(ex);
-            }
-        } catch (IOException | URISyntaxException ex) {
-            logger.error("failed to seed initial db structure");
-            throw new RuntimeException(ex);
-        }
-
         logger.info("adding table gateways to provider");
 
         ServiceLocator sl = ServiceLocator.getInstance();

@@ -106,4 +106,10 @@ public class DBSolicitacaoMuseuTableGateway implements SolicitacaoMuseuTableGate
 
         return rs.getInt(1);
     }
+
+    public void shutdown() throws SQLException {
+        findByIdStatement.close();
+        findAllStatement.close();
+        insertStatement.close();
+    }
 }

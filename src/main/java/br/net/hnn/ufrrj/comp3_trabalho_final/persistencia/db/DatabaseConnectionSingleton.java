@@ -5,8 +5,13 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -36,6 +41,8 @@ public class DatabaseConnectionSingleton {
             logger.error("failed to load db properties");
             throw new RuntimeException("failed to load db properties");
         }
+
+        ensureDatabaseStructure();
     }
 
     public static DatabaseConnectionSingleton getInstance() {
@@ -63,6 +70,32 @@ public class DatabaseConnectionSingleton {
 
             logger.error("something happened, I guess");
             logger.error(ex.toString());
+        }
+    }
+
+    private void ensureDatabaseStructure() {
+        URL resource = this.getClass().getResource("startup.sql");
+        try {
+            String fileContents = new String(Files.readAllBytes(Paths.get(resource.toURI())));
+
+            String[] statements = fileContents.split("🤔");
+            Connection con = getConnection();
+
+            for (String statement : statements) {
+                PreparedStatement ps = con.prepareStatement(statement);
+                ps.executeUpdate();
+            }
+
+        } catch (SQLException ex) {
+            if (ex.getSQLState().equals("X0Y32")) {
+                logger.info("some table already existed. not that it really matters");
+            } else {
+                logger.error("some sql problem");
+                throw new RuntimeException(ex);
+            }
+        } catch (IOException | URISyntaxException ex) {
+            logger.error("failed to seed initial db structure");
+            throw new RuntimeException(ex);
         }
     }
 }

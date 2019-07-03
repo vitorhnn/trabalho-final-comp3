@@ -60,9 +60,6 @@ public class VerificaCriarGestorCommand implements Command<Void, Exception> {
 
         String digitosSubStr = cpf.substring(0, 9);
 
-        int dvCalculado1 = 0;
-        int dvCalculado2 = 0;
-
         int[] digitosArr = digitosSubStr.codePoints()
                 .map(Character::getNumericValue)
                 .toArray();
@@ -70,6 +67,9 @@ public class VerificaCriarGestorCommand implements Command<Void, Exception> {
         if (IntStream.of(digitosArr).allMatch(x -> x == digitosArr[0])) {
             return false;
         }
+
+        int dvCalculado1 = 0;
+        int dvCalculado2 = 0;
 
         for (int i = 0; i < digitosArr.length; i++) {
             int digito = digitosArr[i];
