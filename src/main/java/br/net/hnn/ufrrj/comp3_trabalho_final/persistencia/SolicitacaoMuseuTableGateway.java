@@ -12,5 +12,5 @@ public interface SolicitacaoMuseuTableGateway {
 
     @NotNull List<SolicitacaoMuseuDTO> findAll() throws SQLException;
 
-    void insert(SolicitacaoMuseuDTO dto) throws SQLException;
+    int insert(SolicitacaoMuseuDTO dto) throws SQLException;
 }

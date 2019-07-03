@@ -46,4 +46,34 @@ public class VerificaCriarGestorCommandUnitTest {
         builder.setSenhaGestor("123aaa");
         assertTrue(new VerificaCriarGestorCommand(builder.build()).isValidSenha());
     }
+
+    @Test
+    public void testSenhaInvalida() {
+        SolicitacaoMuseuDTO.SolicitacaoMuseuDTOBuilder builder = new SolicitacaoMuseuDTO.SolicitacaoMuseuDTOBuilder()
+                .setSenhaGestor("");
+
+        assertFalse(new VerificaCriarGestorCommand(builder.build()).isValidSenha());
+
+        builder.setSenhaGestor("senha bem longa");
+        assertFalse(new VerificaCriarGestorCommand(builder.build()).isValidSenha());
+
+        builder.setSenhaGestor("senha com um caractere zoado ##");
+        assertFalse(new VerificaCriarGestorCommand(builder.build()).isValidSenha());
+    }
+
+    @Test
+    public void testNomeValido() {
+        SolicitacaoMuseuDTO.SolicitacaoMuseuDTOBuilder builder = new SolicitacaoMuseuDTO.SolicitacaoMuseuDTOBuilder()
+                .setNomeGestor("João da Silva");
+
+        assertTrue(new VerificaCriarGestorCommand(builder.build()).isValidNome());
+    }
+
+    @Test
+    public void testNomeInvalido() {
+        SolicitacaoMuseuDTO.SolicitacaoMuseuDTOBuilder builder = new SolicitacaoMuseuDTO.SolicitacaoMuseuDTOBuilder()
+                .setNomeGestor("   ");
+
+        assertFalse(new VerificaCriarGestorCommand(builder.build()).isValidNome());
+    }
 }

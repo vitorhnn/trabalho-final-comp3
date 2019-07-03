@@ -29,16 +29,8 @@ public class VerificaCriarGestorCommand implements Command<Void, Exception> {
             throw new UsuarioJaExisteException(previamenteCadastrado.get());
         }
 
-        if (solicitacao.getNomeGestor().trim().isEmpty()) {
-            throw new GestorInvalidoException(solicitacao, "Nome vazio!");
-        }
-
-        if (solicitacao.getCpfGestor().trim().isEmpty()) {
-            throw new GestorInvalidoException(solicitacao, "CPF vazio!");
-        }
-
-        if (solicitacao.getSenhaGestor().trim().isEmpty()) {
-            throw new GestorInvalidoException(solicitacao, "Senha vazia!");
+        if (!isValidNome()) {
+            throw new GestorInvalidoException(solicitacao, "Nome inválido!");
         }
 
         if (!isValidCpf()) {
@@ -49,6 +41,12 @@ public class VerificaCriarGestorCommand implements Command<Void, Exception> {
             throw new GestorInvalidoException(solicitacao, "Senha inválida!");
         }
         return null;
+    }
+
+    protected boolean isValidNome() {
+        String nome = solicitacao.getNomeGestor().trim();
+
+        return !nome.isEmpty();
     }
 
     protected boolean isValidCpf() {

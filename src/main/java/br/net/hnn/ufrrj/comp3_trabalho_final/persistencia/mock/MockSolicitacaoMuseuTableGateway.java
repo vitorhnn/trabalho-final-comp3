@@ -41,12 +41,13 @@ public class MockSolicitacaoMuseuTableGateway implements SolicitacaoMuseuTableGa
     }
 
     @Override
-    public void insert(SolicitacaoMuseuDTO dto) {
+    public int insert(SolicitacaoMuseuDTO dto) {
         SolicitacaoMuseuDTO toInsert = new SolicitacaoMuseuDTO.SolicitacaoMuseuDTOBuilder(dto)
                 .setId(sequential)
                 .build();
 
         mockStorage.put(sequential, toInsert);
-        sequential++;
+
+        return sequential++;
     }
 }

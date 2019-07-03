@@ -39,7 +39,7 @@ public class VerificaCriarGestorCommandFunctionalTest {
             new VerificaCriarGestorCommand(solicitacao).execute();
             fail("Era esperado uma exceção do tipo GestorInvalidoException");
         } catch (GestorInvalidoException gie) {
-            assertEquals("Nome vazio!", gie.getMotivo());
+            assertEquals("Nome inválido!", gie.getMotivo());
         }
     }
 
@@ -54,7 +54,7 @@ public class VerificaCriarGestorCommandFunctionalTest {
             new VerificaCriarGestorCommand(solicitacao).execute();
             fail("Era esperado uma exceção do tipo GestorInvalidoException");
         } catch (GestorInvalidoException gie) {
-            assertEquals("CPF vazio!", gie.getMotivo());
+            assertEquals("CPF inválido!", gie.getMotivo());
         }
     }
 
@@ -70,7 +70,7 @@ public class VerificaCriarGestorCommandFunctionalTest {
             new VerificaCriarGestorCommand(solicitacao).execute();
             fail("Era esperado uma exceção do tipo GestorInvalidoException");
         } catch (GestorInvalidoException gie) {
-            assertEquals("Senha vazia!", gie.getMotivo());
+            assertEquals("Senha inválida!", gie.getMotivo());
         }
     }
 

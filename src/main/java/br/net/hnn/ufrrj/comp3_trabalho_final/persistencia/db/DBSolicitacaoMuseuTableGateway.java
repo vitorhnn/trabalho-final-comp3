@@ -6,10 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -38,7 +35,7 @@ public class DBSolicitacaoMuseuTableGateway implements SolicitacaoMuseuTableGate
         );
 
         insertStatement = dbConn.prepareStatement(
-                "INSERT INTO Solicitacao (nome, dataCriacao, cidade, estado, cpfGestor, nomeGestor, senhaGestor) VALUES (?, ?, ?, ?, ?, ?, ?)"
+                "INSERT INTO Solicitacao (nome, dataCriacao, cidade, estado, cpfGestor, nomeGestor, senhaGestor) VALUES (?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS
         );
     }
 
@@ -91,7 +88,7 @@ public class DBSolicitacaoMuseuTableGateway implements SolicitacaoMuseuTableGate
     }
 
     @Override
-    public void insert(SolicitacaoMuseuDTO dto) throws SQLException {
+    public int insert(SolicitacaoMuseuDTO dto) throws SQLException {
         insertStatement.clearParameters();
 
         insertStatement.setString(1, dto.getNome());
@@ -102,5 +99,11 @@ public class DBSolicitacaoMuseuTableGateway implements SolicitacaoMuseuTableGate
         insertStatement.setString(6, dto.getNomeGestor());
         insertStatement.setString(7, dto.getSenhaGestor());
         insertStatement.executeUpdate();
+
+        ResultSet rs = insertStatement.getGeneratedKeys();
+
+        rs.next();
+
+        return rs.getInt(1);
     }
 }
